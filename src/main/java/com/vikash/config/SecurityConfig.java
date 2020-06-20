@@ -18,7 +18,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/**").hasAnyRole("USER","ADMIN").anyRequest().authenticated().and().formLogin();
+		http.authorizeRequests().antMatchers("/images/**").permitAll().antMatchers("/login*").permitAll()
+		.antMatchers("/**").hasAnyRole("ADMIN", "USER").anyRequest().authenticated().and().formLogin()
+		.loginPage("/login").usernameParameter("username").passwordParameter("password")
+		.loginProcessingUrl("/doLogin").defaultSuccessUrl("/index", true).failureUrl("/accessDenied")
+		.permitAll().and().exceptionHandling().accessDeniedPage("/accessDenied");
 	}
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/images/**").addResourceLocations("/classpath:/static/images/**");
