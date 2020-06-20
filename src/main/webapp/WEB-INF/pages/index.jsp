@@ -20,7 +20,19 @@
 						<h2>Welcome to Portal</h2>
 					</div>
 				</div>
-				
+				<div class="panel-body" align="center">
+					<div class="row">
+						<div class="col-xs-6" align="left">
+							<a href="login">Home</a>
+
+						</div>
+						<div class="col-xs-6" align="right">
+							<a href="logout">Logout</a>
+
+						</div>
+					</div>
+					
+				</div>
 			</div>
 		</div>
 	</div>

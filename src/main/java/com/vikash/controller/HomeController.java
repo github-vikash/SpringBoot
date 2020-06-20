@@ -20,6 +20,9 @@ public class HomeController {
 		return "index";
 	}
 	
-
+	@GetMapping("logout")
+	public String showLogOut() {		
+			return "login";
+	}
 	
 }

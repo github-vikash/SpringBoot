@@ -22,7 +22,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.antMatchers("/**").hasAnyRole("ADMIN", "USER").anyRequest().authenticated().and().formLogin()
 		.loginPage("/login").usernameParameter("username").passwordParameter("password")
 		.loginProcessingUrl("/doLogin").defaultSuccessUrl("/index", true).failureUrl("/accessDenied")
-		.permitAll().and().exceptionHandling().accessDeniedPage("/accessDenied");
+		.permitAll().and().exceptionHandling().accessDeniedPage("/accessDenied").and().logout()
+		.logoutUrl("/logout").logoutSuccessUrl("/login").permitAll();
 	}
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/images/**").addResourceLocations("/classpath:/static/images/**");
