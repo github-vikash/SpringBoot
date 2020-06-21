@@ -7,7 +7,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 public class HomeController {
 
-	
+	@GetMapping("/")
+	public String showHomeIndex() {
+
+		return "index";
+	}
 	
 	@GetMapping("login")
 	public String showIndex() {
@@ -23,6 +27,11 @@ public class HomeController {
 	@GetMapping("logout")
 	public String showLogOut() {		
 			return "login";
+	}
+	@GetMapping(value = "accessDenied")
+	public String showAccessDenied() {
+
+		return "accessDenied";
 	}
 	
 }

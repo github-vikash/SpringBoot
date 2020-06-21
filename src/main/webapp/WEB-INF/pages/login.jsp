@@ -21,11 +21,7 @@
 		<div class="col-xs-6 col-xs-offset-3">
 			<div class="panel panel-primary">
 				<div class="panel-heading">
-					<div class="row">
-
-						<img alt="" src="<spring:url value='/images/Swift.jpg'/>"
-							class="col-xs-4 col-xs-offset-4">
-					</div>
+					
 					<div class="row" align="center">
 						<h2>Login Page:</h2>
 					</div>
