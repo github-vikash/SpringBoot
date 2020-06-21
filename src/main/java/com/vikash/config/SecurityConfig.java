@@ -7,12 +7,16 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	DataSource dataSource;
+	
+	@Autowired
+	BCryptPasswordEncoder encoder;
 	
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
@@ -22,10 +26,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		 * roles("USER").and().withUser("San")
 		 * .password("{noop}San@123").roles("Admin");
 		 */
-		 
+		String encoded = encoder.encode("sam");
+		System.out.println("======encoded=====::: "+encoded);
 		
-		  auth.jdbcAuthentication().dataSource(dataSource).
-		  usersByUsernameQuery("SELECT username,password,enabled FROM user WHERE username=?"
+		  auth.jdbcAuthentication().dataSource(dataSource).passwordEncoder(encoder)
+		  .usersByUsernameQuery("SELECT username,password,enabled FROM user WHERE username=?"
 		  ).
 		  authoritiesByUsernameQuery("SELECT username,role FROM user_roles WHERE username=?"
 		  );
