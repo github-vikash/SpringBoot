@@ -39,10 +39,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
-		//http.csrf().disable();
+		http.csrf().disable();
+		//https authentication
 		http.requiresChannel().anyRequest()
 		 .requiresSecure();
-
+		// session management
+		http.sessionManagement().maximumSessions(1)
+		 .and()
+		 .sessionAuthenticationErrorUrl("/invalidSession.html")
+		 .invalidSessionUrl("/invalidSession.html");
+		 
 		
 		http.authorizeRequests().antMatchers("/images/**").permitAll().antMatchers("/login*").permitAll()
 		.antMatchers("/**").hasAnyRole("ADMIN", "USER").anyRequest().authenticated().and().formLogin()

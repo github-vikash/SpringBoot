@@ -28,10 +28,15 @@ public class HomeController {
 	public String showLogOut() {		
 			return "login";
 	}
-	@GetMapping(value = "accessDenied")
+	@GetMapping("accessDenied")
 	public String showAccessDenied() {
 
 		return "accessDenied";
+	}
+	@GetMapping("sessionExpired")
+	public String showSessionExpired() {
+
+		return "sessionexpired";
 	}
 	
 }
